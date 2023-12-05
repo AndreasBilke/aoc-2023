@@ -173,7 +173,7 @@ impl Rule {
     }
 
     fn convert(&self, source: u64) -> Option<u64> {
-        return if source >= self.source_start && source <= self.source_start + self.range {
+        return if source >= self.source_start && source < self.source_start + self.range {
             let dest = self.dest_start + (source - self.source_start);
 
             Some(dest)
