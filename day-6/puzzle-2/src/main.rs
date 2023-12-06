@@ -45,21 +45,21 @@ impl Race {
         let t = self.available_time as f64;
         let d = self.winning_distance as f64;
 
-        let mut x1 = (t - (t*t - 4f64 * d).sqrt()) / 2f64;
-        let mut x2 = (t + (t*t - 4f64 * d).sqrt()) / 2f64;
+        let mut p1 = (t - (t*t - 4f64 * d).sqrt()) / 2f64;
+        let mut p2 = (t + (t*t - 4f64 * d).sqrt()) / 2f64;
 
-        if x1 == x1.ceil() {
-            x1 = x1 + 1f64;
+        if p1 == p1.ceil() {
+            p1 = p1 + 1f64;
         } else {
-            x1 = x1.ceil();
+            p1 = p1.ceil();
         }
 
-        if x2 == x2.floor() {
-            x2 = x2 - 1f64;
+        if p2 == p2.floor() {
+            p2 = p2 - 1f64;
         } else {
-            x2 = x2.floor();
+            p2 = p2.floor();
         }
 
-        (x1 as u64, x2 as u64)
+        (p1 as u64, p2 as u64)
     }
 }
