@@ -59,10 +59,6 @@ impl SpringRow {
             return;
         }
 
-        // if !self.can_be_valid_pattern(&current) {
-        //     return;
-        // }
-
         let new_corrupt_line = current.replacen("?", "#", 1);
         self.explore_combinations(new_corrupt_line, combinations);
 
@@ -71,8 +67,6 @@ impl SpringRow {
     }
 
     fn is_valid(&self, current: &String) -> bool {
-        // idea as in can_be_valid_pattern but much stronger conditions
-
         let current_pattern = Self::extract_pattern(&current);
         if current_pattern.len() != self.corrupt_spring_pattern.len() {
             return false;
@@ -98,29 +92,5 @@ impl SpringRow {
             .collect();
 
         pattern
-    }
-
-    fn can_be_valid_pattern(&self, current: &String) -> bool {
-        // idea: replace all ? with ., split by . and count sub array length
-        // compare corrupt_spring_pattern (starting with the first element) with the current pattern
-        // if current pattern has MORE consecutive corrupted springs than needed, current cannot in any case be a
-        // valid combination
-
-        let current_pattern = Self::extract_pattern(current);
-
-        // by the previous tactic we get more/equal consecutive pieces compared to the search pattern
-        // if our current_pattern has LESS pieces, we cannot (ever) find a valid pattern here
-
-        if current_pattern.len() < self.corrupt_spring_pattern.len() {
-            return false;
-        }
-
-        for i in 0 .. self.corrupt_spring_pattern.len() {
-            if current_pattern[i] > self.corrupt_spring_pattern[i] {
-                return false;
-            }
-        }
-
-        true
     }
 }
