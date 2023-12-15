@@ -49,17 +49,9 @@ fn main() {
 }
 
 fn to_hash(element: &str) -> u128 {
-    let mut h = 0u128;
-
-    element.chars().for_each(|c| {
-        let ascii_code = c as u128;
-        h = h + ascii_code;
-        h = h * 17;
-        h = h % 256;
-
-    });
-
-    h
+    element.chars().fold(0u128, |agg, item|
+        ((agg + item as u128) * 17) % 256
+    )
 }
 
 struct Box {
