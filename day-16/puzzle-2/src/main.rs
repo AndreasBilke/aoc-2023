@@ -14,46 +14,46 @@ fn main() {
     let lines: Vec<&str> = lines.trim().split('\n').collect();
 
     let mut max_energy = 0;
-    let orignal = Room::from(&lines);
-    for row in 0..=orignal.max_y {
+    let original = Room::from(&lines);
+    for row in 0..=original.max_y {
         let mut extra_room = Room {
-            max_x: orignal.max_x,
-            max_y: orignal.max_y,
-            seen_beams: orignal.seen_beams.clone(),
-            mirrors: orignal.mirrors.clone()
+            max_x: original.max_x,
+            max_y: original.max_y,
+            seen_beams: original.seen_beams.clone(),
+            mirrors: original.mirrors.clone()
         };
 
         extra_room.simulate_beam((-1, row), Direction::ToRight);
         max_energy = max_energy.max(extra_room.num_energized_spots());
     }
-    for row in 0..=orignal.max_y {
+    for row in 0..=original.max_y {
         let mut extra_room = Room {
-            max_x: orignal.max_x,
-            max_y: orignal.max_y,
-            seen_beams: orignal.seen_beams.clone(),
-            mirrors: orignal.mirrors.clone()
+            max_x: original.max_x,
+            max_y: original.max_y,
+            seen_beams: original.seen_beams.clone(),
+            mirrors: original.mirrors.clone()
         };
 
         extra_room.simulate_beam((extra_room.max_y + 1, row), Direction::ToLeft);
         max_energy = max_energy.max(extra_room.num_energized_spots());
     }
-    for column in 0..=orignal.max_x {
+    for column in 0..=original.max_x {
         let mut extra_room = Room {
-            max_x: orignal.max_x,
-            max_y: orignal.max_y,
-            seen_beams: orignal.seen_beams.clone(),
-            mirrors: orignal.mirrors.clone()
+            max_x: original.max_x,
+            max_y: original.max_y,
+            seen_beams: original.seen_beams.clone(),
+            mirrors: original.mirrors.clone()
         };
 
         extra_room.simulate_beam((column, -1), Direction::ToBottom);
         max_energy = max_energy.max(extra_room.num_energized_spots());
     }
-    for column in 0..=orignal.max_x {
+    for column in 0..=original.max_x {
         let mut extra_room = Room {
-            max_x: orignal.max_x,
-            max_y: orignal.max_y,
-            seen_beams: orignal.seen_beams.clone(),
-            mirrors: orignal.mirrors.clone()
+            max_x: original.max_x,
+            max_y: original.max_y,
+            seen_beams: original.seen_beams.clone(),
+            mirrors: original.mirrors.clone()
         };
 
         extra_room.simulate_beam((column, extra_room.max_y + 1), Direction::ToTop);
