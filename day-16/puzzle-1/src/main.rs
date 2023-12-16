@@ -14,7 +14,7 @@ fn main() {
     let lines: Vec<&str> = lines.trim().split('\n').collect();
 
     let mut r = Room::from(&lines);
-    r.simulate_beam((0, 0));
+    r.simulate_beam((-1, 0));
 
     let spots = r.num_energized_spots();
     println!("Number of spots: {spots}");
@@ -67,9 +67,8 @@ impl Room {
 
     fn simulate_beam(&mut self, start: (i32, i32)) {
         let initial_beam = Beam { position: start, direction: Direction::ToRight };
-        self.seen_beams.insert(initial_beam.clone());
-
         let mut beams = vec![initial_beam];
+
         loop {
             let next_beams= self.simulate_beams(&beams);
             if next_beams.len() == 0 {
