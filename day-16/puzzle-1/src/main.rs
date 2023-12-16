@@ -46,25 +46,6 @@ impl Room {
         Room { seen_beams, mirrors, max_x, max_y }
     }
 
-    fn draw(&self) {
-        for r in 0..=self.max_y {
-            for c in 0..=self.max_x {
-                if let Some(mirror) = self.mirrors.get(&(c, r)) {
-                    let c = match mirror {
-                        Mirror::BottomToTop => '/',
-                        Mirror::Vertical => '|',
-                        Mirror::Horizontal => '-',
-                        Mirror::TopToBottom => '\\'
-                    };
-                    print!("{c}");
-                } else {
-                    print!(".");
-                }
-            }
-            println!();
-        }
-    }
-
     fn simulate_beam(&mut self, start: (i32, i32)) {
         let initial_beam = Beam { position: start, direction: Direction::ToRight };
         let mut beams = vec![initial_beam];
