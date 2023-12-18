@@ -46,7 +46,7 @@ impl Hole {
         }
     }
 
-    fn compute_interior(&self) -> u32 {
+    fn compute_interior(&self) -> u128 {
         let mut interior: i128 = 0;
         let mut border_count: i128 = 0;
         // formulae taken from https://www.mathopenref.com/coordpolygonarea.html
@@ -63,7 +63,7 @@ impl Hole {
         interior = interior / 2;
         interior = interior + 1;
 
-        interior.abs() as u32
+        interior.abs() as u128
     }
 }
 
